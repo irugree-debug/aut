@@ -1,0 +1,332 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/fonts/stylesheet.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <div class="container_login" id="container_login" style="display: 1;">          
+        <div id="login_container">
+            <div class="by_cef_studio">АВТОРИЗАЦИЯ<img src="images/line_header.png" class="line_header"></div>
+            <div class="inputs">
+                <div id="error-password" class="message"></div>
+                <div class="input_container">
+                    <div class="text_login">Добро пожаловать! Перед началом игры Вам нужно авторизоваться, введите пароль, который Вы вводили при регистрации!</div>
+
+                    <div class="text-input"><img src="images/line_input.png" class="line-input">Ваш игровой ник</div>
+                    <input id="login-nick" class="nick-input" type="text" readonly>
+                    <div id="nickname" class="nickname"></div>
+
+                    <div class="text-input"><img src="images/line_input.png" class="line-input">Введите пароль</div>
+                    <input id="login-password" class="password-input" type="text" placeholder="Введите Ваш пароль">
+
+                    <label class="agreement">Ознокомлен(на) с правилами проекта<input type="checkbox"><span class="checkmark"></span></label>
+                </div>                 
+                <div class="input_container" style="margin-top: 16px;">
+                    <div class="loginbutton" style="width: 93%;" onclick="onAuth();">Далее</div>
+                </div>                             
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+.agreement {
+  position: relative;
+  padding-left: 23px;
+  bottom: -9px;
+  right: 21px;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+  color: #FFF;
+}
+
+.agreement input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border-radius: 2px;
+  background-color: rgba(217, 217, 217, 0.20);
+}
+.agreement:hover input ~ .checkmark {
+ background-color: rgba(217, 217, 217, 0.20);
+}
+.agreement input:checked ~ .checkmark {
+  background-color: rgba(217, 217, 217, 0.20);
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.agreement input:checked ~ .checkmark:after {
+  display: block;
+}
+.agreement .checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border: solid #FFF;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+@font-face {
+    font-family: 'ProximaNova-Bold';
+    src: url('css/fonts/ProximaNova-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'ProximaNova-Black';
+    src: url('css/fonts/ProximaNova-Black.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'RobotoMedium';
+    src: url('css/fonts/RobotoL.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(images/fon.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* Это свойство растянет картинку на весь экран, сохраняя пропорции */
+    font-family: 'RobotoMedium';
+    overflow: hidden;
+    text-align: center;
+    -ms-user-select: none; 
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    user-select: none; 
+}
+#login_container {
+    font-family: 'RobotoMedium';
+    padding: 15px;
+    border-radius: 10px;
+    width: 300px;
+    margin-top: 370px;    
+    margin-left: 80px;
+    -webkit-animation: fadeInFromNone 0.5s ease-out;
+	-moz-animation: fadeInFromNone 0.5s ease-out;
+	-o-animation: fadeInFromNone 0.5s ease-out;
+	animation: fadeInFromNone 0.5s ease-out
+}
+.by_cef_studio {
+    position: absolute;
+    color: white;
+    font-family: 'ProximaNova-Bold';
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: -165px;
+    margin-left: 10px;
+}
+.nickname {
+    position: absolute;
+    color: #999;
+    font-size: 10pt;
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+    line-height: normal;
+    margin-top: -85px;
+    margin-left: 50px;
+}
+.line_header {
+	position: absolute;
+    width: 88px;
+    height: 2px;
+    right: -100px;
+	top: 21px;
+}
+.text_login {
+    width: 25%;
+    position: absolute;
+    color: #747474;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+    line-height: normal;
+    margin-top: -115px;
+    margin-left: 10px;
+}
+
+.line-input {
+    position: absolute;
+    width: 31px;
+    height: 2px;
+	left: -4.5vh;
+    top: 10px;
+}
+.text-input {
+    width: 25%;
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+    line-height: normal;
+    margin-top: -24px;
+    margin-left: 47px;
+}
+
+.nick-input {
+    width: 340px;
+    height: 65px;
+    margin-top: 5px;
+    margin-bottom: 45px; 
+    font-family: 'RobotoMedium';
+    color: #999;
+    outline: 0;
+    font-size: 10pt;
+    font-weight: 600;
+    transition: .3s;
+    text-align: left;
+    padding: 0 65px 0 50px;
+    border-radius: 8px;
+    border: 1px solid #4A4A4A;
+    background: rgba(0, 0, 0, 0.10);
+    background: url(images/player.png) no-repeat scroll 20px 21px;
+}
+.nick-input::placeholder {
+    color: #999;
+}
+
+.password-input {
+    width: 340px;
+    height: 65px;
+    margin-top: 5px;
+    font-family: 'RobotoMedium';
+    color: #999;
+    outline: 0;
+    font-size: 10pt;
+    font-weight: 600;
+    transition: .3s;
+    text-align: left;
+    padding: 0 65px 0 50px;
+    border-radius: 8px;
+    border: 1px solid #4A4A4A;
+    background: rgba(0, 0, 0, 0.10);
+    background: url(images/password.png) no-repeat scroll 20px 21px;
+}
+.password-input::placeholder {
+    color: #999;
+}
+.loginbutton {
+    position: relative;
+    border-radius: 10px;
+    background: white;
+    top: 20px;
+    color: #161616;
+    padding: 13px;
+    outline: none;
+    font-size: 11pt;
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+    transition: .3s;
+}
+.loginbutton:hover {
+    box-shadow: 0px 0px 15px #ffffff9a;
+    color: #161616;
+}
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+</style>
+<script>
+document.ondragstart = test;
+document.onselectstart = test;
+document.oncontextmenu = test;
+function test() {
+return false;
+}
+document.oncontextmenu;
+function onAuth() {
+    let password = document.getElementById("login-password").value;
+
+    if (password == '') return;
+
+    cef.emit("cef_auth_account", password);
+}
+var _0x5677c3=_0x16fa;function _0x16fd(){var _0x29fa65=['set_focus','183219Kxkmaw','1115675koTjLk','133BNHlIY','28044IHcsVF','container_login','168047CQLzWf','30oCRVje','cef_auth_show','42339050qlzaSY','getElementById','4cTsVKd','708xJtest','auth_successfully','8KfFhUc','display:\x201;','488904kgVfFy','2710oZHAeP','1534431vxMpKp'];_0x16fd=function(){return _0x29fa65;};return _0x16fd();}function _0x16fa(_0x33a609,_0x1214d9){var _0x16fdaf=_0x16fd();return _0x16fa=function(_0x16fa7e,_0x7b9539){_0x16fa7e=_0x16fa7e-0x1cb;var _0x2f9954=_0x16fdaf[_0x16fa7e];return _0x2f9954;},_0x16fa(_0x33a609,_0x1214d9);}(function(_0xbf9731,_0x389105){var _0x299dec=_0x16fa,_0x16257c=_0xbf9731();while(!![]){try{var _0x5de1f3=-parseInt(_0x299dec(0x1db))/0x1*(parseInt(_0x299dec(0x1d5))/0x2)+-parseInt(_0x299dec(0x1d9))/0x3*(-parseInt(_0x299dec(0x1d2))/0x4)+parseInt(_0x299dec(0x1dc))/0x5*(-parseInt(_0x299dec(0x1ce))/0x6)+parseInt(_0x299dec(0x1dd))/0x7*(-parseInt(_0x299dec(0x1d7))/0x8)+-parseInt(_0x299dec(0x1cb))/0x9*(-parseInt(_0x299dec(0x1d8))/0xa)+-parseInt(_0x299dec(0x1cd))/0xb*(parseInt(_0x299dec(0x1d3))/0xc)+parseInt(_0x299dec(0x1d0))/0xd;if(_0x5de1f3===_0x389105)break;else _0x16257c['push'](_0x16257c['shift']());}catch(_0x14aea7){_0x16257c['push'](_0x16257c['shift']());}}}(_0x16fd,0xab51a),cef['on'](_0x5677c3(0x1cf),()=>{var _0x25212a=_0x5677c3;cef[_0x25212a(0x1da)](!![]),document['getElementById']('container_login')['style']=_0x25212a(0x1d6);}),cef['on'](_0x5677c3(0x1d4),()=>{var _0x336982=_0x5677c3;document[_0x336982(0x1d1)](_0x336982(0x1cc))['style']='display:\x20none;',cef['hide'](0x1),cef['set_focus'](0x0);}),cef['on']('cef_auth_nick',_0x355546=>{var _0x3e97bb=_0x5677c3;document[_0x3e97bb(0x1d1)]('nickname')['innerHTML']=''+_0x355546;}));
+</script>  
